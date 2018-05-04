@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learn D3.js Collaboratively</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style type="text/css">
+
+		.center{
+			margin:auto;
+		}
+
+		 #player
+        {
+          width: 660px;
+          float: left;
+        }
+    
+        #Questions
+        {
+          margin-left: 700px; /* Change this to whatever the width of your left column is*/
+          align-items: center;
+        }
+
+        #Question_Area{
+        	display: none;
+        }
+
+        #Choice_Area{
+        	display: none;
+        }
+    
+        .clear
+        {
+          clear: both;
+        }
+	</style>
+</head>
+<body>
+
+<!--Embedded players must have a view port that is atleast 200px by 200px -->
+<!-- Recommended size is 480 pixels wide and 270 pixels tall -->
+
+<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id ="working_area">
+    	<div id="player">
+    		
+    	</div>
+
+    	<div id = "Questions" align="center">
+
+    		<!-- <button id = "ask_button" type = "button">Ask Questions</button> -->
+
+       
+
+
+
+    		<button id = "Test_button" type = "button">Test yourself</button><br><br>
+        <!-- <h3 id = "QHeading"> Question: You created an svg container with width = 400 pixels and height = 300 pixels. You then added bar charts of height 50 and width 400, 500 and 600 to the container. What do you expect?</h3> -->
+    		
+        <form id = "Question_Area"> 
+          <P>Question: You created an svg container with width = 400 pixels and height = 300 pixels. You then added bar charts of height 50 and width 400, 500 and 600 to the container. What do you expect?" is:<BR>
+            <input type="radio" name="Q1" value="DWidth">Bars will be shown with different widths<BR>
+            <input type="radio" name="Q1" value="SWidth">All bars will be shown with same width<BR>
+            <input type="radio" name="Q1" value="EWidth">Container will expand according to bar width<BR>
+            <input type="radio" name="Q1" value="FWidth">Bars will expand to fit to container width<BR>
+        </p></form>
+
+    		<!-- <form id="Choice_Area">
+  				Choice 1:<br>
+  				<input id = "TextChoice1" type="text" name="Choice 1">
+  				<br>
+  				Choice 2:<br>
+  				<input type="text" name="Choice 2"> -->
+			</form>
+        <button id = "Submit_button" onclick="clickBtn()" type = "button">Submit</button>
+    	</div>
+
+    </div>
+
+ 
+    
+    <textarea id = "Question_Area">Write stuff</textarea>
+
+  
+    
+    <div id = "After_submit" style="visibility: hidden;">
+      <p>Now ask you peer a question to help them learn</p>
+
+      <textarea id = "PeerQ"></textarea>
+      <!-- <input id = "PeerQ" type="text" name="PeerAsking_Q"> -->
+
+      <p>Provide them with an answer for them to check thier answer</p>
+      <textarea id = "PeerA"></textarea>
+      <!-- <input id = "PeerA" type="text" name="PeerAsking_A"> -->
+
+      <button id = "SubmitQ_button" onclick="StoreQ()" type = "button">Submit Peer Question</button>
+    </div>
+
+
+    <div id = "TestPeerQ" style="visibility: hidden;">
+      
+      <p> This is a question provided by your peer</p>      
+      <p id = "InputQ"> bring question from data</p>
+
+      <textarea id = "PeerA2">Enter your answer here</textarea>
+      <button id = "SubmitQ_button" onclick="Compare()" type = "button">Compare Answer</button>
+
+            
+
+      <form id = "CompareArea" style="visibility: hidden;"> 
+        <p> Your peer answer is: </p> 
+       <p id = "InputAns"> bring Answer from data</p>   
+          <P>Was that helpful?<BR>
+            <input type="radio" name="H" value="Yes">Yes<BR>
+            <input type="radio" name="H" value="No">No<BR>
+        </p></form>
+
+    </div>
+  
+
+    <script>
+      
+      //document.getElementById("After_submit").style.visibility = "hidd"
+      //$('#After_submit').css("visibility", "hidden");
+    	$("#Test_button").click(function(){
+    	$("#Question_Area").toggle();
+      //$("#Choice_Area").toggle();
+    });
+    	
+    	//function askevent(){
+
+    	//	document.getElementById("workarea").innerHTML = "Ask Your Question Here"
+    	//}
+    </script>
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'n5NcCoa9dDU',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 60000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+
+
+
+
+
+      <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyD067CDIsjBkYqKJGykADVRQqmwAzeT7rI",
+          authDomain: "collaborative-video.firebaseapp.com",
+          databaseURL: "https://collaborative-video.firebaseio.com",
+          projectId: "collaborative-video",
+          storageBucket: "collaborative-video.appspot.com",
+          messagingSenderId: "209330220410"
+        };
+        firebase.initializeApp(config);
+
+
+
+      </script>
+
+      
+      <script src="index.js"></script>
+
+</body>
+</html>
