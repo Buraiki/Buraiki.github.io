@@ -113,6 +113,7 @@
           <P>Was that helpful?<BR>
             <input type="radio" name="H" value="Yes">Yes<BR>
             <input type="radio" name="H" value="No">No<BR>
+	<button id = "DumpButton" type = "button">Submit</button>
         </p></form>
 
     </div>
@@ -147,7 +148,7 @@
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-          videoId: 'n5NcCoa9dDU',
+          videoId: 'iMYkVLWc3y0',
           events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
@@ -166,7 +167,7 @@
       var done = false;
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 60000);
+          setTimeout(stopVideo, 6000000);
           done = true;
         }
       }
