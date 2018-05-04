@@ -24,11 +24,12 @@
 
         if($('input[name=Q1]:checked').val() == "SWidth")
         {
-        	window.alert("do you copy?");
+        	window.alert("That is correct!");
         	//make after submit stuff visiable 
           $('#After_submit').css("visibility", "visible");
         }
         else{
+		window.alert("Not quite");
         	$('#TestPeerQ').css("visibility", "visible");
         	firebaseQuestionRef.on('value', function(WhyNot){
           		 Qdata.innerText = WhyNot.val();
