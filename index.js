@@ -65,7 +65,7 @@
 
         function Compare(){
 
-        	window.alert("CompareButton");
+        	window.alert("Check the answer from your peer and compare");
         	firebaseAnswerRef.on('value', function(WhyNot){
           		 Adata.innerText = WhyNot.val(); 
           		 
