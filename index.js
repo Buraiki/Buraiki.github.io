@@ -62,6 +62,10 @@
         		window.alert("Thank you");
 		 }
 
+	function ShowQ()
+	{
+		$('#Test_button').css("visibility", "visible");
+	}
 
         function Compare(){
 
