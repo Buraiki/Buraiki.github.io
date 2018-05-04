@@ -64,7 +64,7 @@
 
 	function ShowQ()
 	{
-		$('#Test_button').css("visibility", "visible");
+		$('#Submit_button').css("visibility", "visible");
 	}
 
         function Compare(){
