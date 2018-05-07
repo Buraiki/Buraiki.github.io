@@ -15,7 +15,8 @@
 
         var Ans = document.getElementById("PeerA");
        
-        firebaseQuestionRef = firebase.database().ref().child("BackupQ").child("BQ");
+        BackupRef = firebase.database().ref().child("BackupQ").child("BQ");
+	firebaseQuestionRef = firebase.database().ref().child("Questions").child("Q1");
         firebaseAnswerRef = firebase.database().ref().child("Answers").child("A1");
 
        
@@ -31,7 +32,7 @@
         else{
 		window.alert("Not quite");
         	$('#TestPeerQ').css("visibility", "visible");
-        	firebaseQuestionRef.on('value', function(WhyNot){
+        	BackupRef.on('value', function(WhyNot){
           		 Qdata.innerText = WhyNot.val();
           		   	
         })
@@ -56,8 +57,8 @@
         	var AnsText = Ans.value;
           	var QText = PeerQuestion.value;
 
-         	firebaseQuestionRef.set(QText);
-          	firebaseAnswerRef.set(AnsText);
+         	firebaseQuestionRef.push(QText);
+          	firebaseAnswerRef.push(AnsText);
 
         		window.alert("Thank you");
 		 }
