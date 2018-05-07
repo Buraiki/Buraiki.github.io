@@ -14,7 +14,7 @@
         var Qtext = PeerQuestion.value;
 
         var Ans = document.getElementById("PeerA");
-       BackupQ
+       
         firebaseQuestionRef = firebase.database().ref().child("BackupQ").child("BQ");
         firebaseAnswerRef = firebase.database().ref().child("Answers").child("A1");
 
