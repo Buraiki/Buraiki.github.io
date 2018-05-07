@@ -15,7 +15,9 @@
 
         var Ans = document.getElementById("PeerA");
        
-        BackupRef = firebase.database().ref().child("BackupQ").child("BQ");
+        QBackupRef = firebase.database().ref().child("BackupQ").child("BQ");
+        ABackupRef = firebase.database().ref().child("BackupA").child("BA");
+
 	firebaseQuestionRef = firebase.database().ref().child("Questions").child("Q1");
         firebaseAnswerRef = firebase.database().ref().child("Answers").child("A1");
 
@@ -32,7 +34,7 @@
         else{
 		window.alert("Not quite");
         	$('#TestPeerQ').css("visibility", "visible");
-        	BackupRef.on('value', function(WhyNot){
+        	QBackupRef.on('value', function(WhyNot){
           		 Qdata.innerText = WhyNot.val();
           		   	
         })
@@ -71,7 +73,7 @@
         function Compare(){
 
         	window.alert("Check the answer from your peer and compare");
-        	firebaseAnswerRef.on('value', function(WhyNot){
+        	ABackupRef.on('value', function(WhyNot){
           		 Adata.innerText = WhyNot.val(); 
           		 
           		 $('#CompareArea').css("visibility", "visible");
